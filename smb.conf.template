@@ -1,0 +1,58 @@
+[global]
+
+server role = standalone server
+
+security = user
+
+workgroup = WORKGROUP
+
+server string = Time Machine Server
+
+protocol = SMB3
+
+# Apple compatibility
+vfs objects = fruit streams_xattr
+
+ea support = yes
+
+fruit:metadata = stream
+
+fruit:model = MacSamba
+
+fruit:posix_rename = yes
+
+fruit:veto_appledouble = no
+
+fruit:wipe_intentionally_left_blank_rfork = yes
+
+fruit:delete_empty_adfiles = yes
+
+
+# Time Machine advertisement
+fruit:time machine = yes
+
+
+# Logging
+log file = /dev/stdout
+
+logging = file
+
+max log size = 0
+
+
+[TimeMachine]
+
+path = /data
+
+browseable = yes
+
+read only = no
+
+valid users = ${SMB_USER}
+
+force user = ${SMB_USER}
+
+fruit:time machine = yes
+
+# Optional quota presented to macOS
+fruit:time machine max size = ${TM_SIZE}
